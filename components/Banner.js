@@ -8,6 +8,7 @@ function Banner() {
         layout="fill"
         objectFit="cover"
         objectPosition="bottom"
+        priority={true}
       />
       <div className="absolute h-full w-full flex flex-col space-y-5 justify-center items-center">
         <p className="text-sm sm:text-lg font-bold">Not sure where to go?</p>
