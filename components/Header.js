@@ -4,7 +4,6 @@ import {
   MenuIcon,
   SearchIcon,
   UserCircleIcon,
-  UsersIcon,
 } from "@heroicons/react/solid";
 
 function Header() {

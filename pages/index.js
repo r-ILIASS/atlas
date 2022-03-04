@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Banner from "../components/Banner";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LargeCard from "../components/LargeCard";
 import Main from "../components/Main";
@@ -50,6 +51,7 @@ export default function Home({ exploreData, cardsData }) {
           buttonLabel="Get Inspired"
         />
       </Main>
+      <Footer />
     </div>
   );
 }
