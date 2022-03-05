@@ -9,6 +9,7 @@ function LargeCard({ img, title, description, buttonLabel }) {
           layout="fill"
           objectFit="cover"
           className="rounded-2xl"
+          alt=""
         />
       </div>
 
