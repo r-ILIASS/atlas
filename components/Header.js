@@ -1,12 +1,34 @@
+import { useState } from "react";
 import Image from "next/image";
 import {
   GlobeAltIcon,
   MenuIcon,
   SearchIcon,
   UserCircleIcon,
+  UserIcon,
 } from "@heroicons/react/solid";
+// react-date-range
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRangePicker } from "react-date-range";
 
 function Header() {
+  const [searchInput, setSearchInput] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [numberOfGuests, setNumberOfGuests] = useState(1);
+
+  const handleSelect = (ranges) => {
+    setStartDate(ranges.Selection.startDate);
+    setEndDate(ranges.Selection.endDate);
+  };
+
+  const selectionRange = {
+    startDate,
+    endDate,
+    key: "Selection",
+  };
+
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5">
       {/* Left: Brand */}
@@ -23,6 +45,8 @@ function Header() {
       {/* Middle: Searchbar */}
       <div className="flex items-center md:border-2 rounded-full md:shadow-sm py-2">
         <input
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
           className="ml-5 bg-transparent outline-none flex-grow text-sm text-gray-600 placeholder-gray-400"
           type="text"
           placeholder="Start your search..."
@@ -39,6 +63,41 @@ function Header() {
           <UserCircleIcon className="h-6" />
         </div>
       </div>
+
+      {/* Search Control */}
+      {searchInput && (
+        <div className="flex flex-col col-span-3 mx-auto mt-4">
+          <DateRangePicker
+            ranges={[selectionRange]}
+            minDate={new Date()}
+            onChange={(ranges) => handleSelect(ranges)}
+          />
+          <div className="px-4 mb-4">
+            <div className=" flex items-center border-b pb-2">
+              <h2 className="text-xl flex-grow font-semibold">
+                Number of guests
+              </h2>
+              <UserIcon className="h-5" />
+              <input
+                type="number"
+                min={1}
+                max={6}
+                value={numberOfGuests}
+                onChange={(e) => setNumberOfGuests(e.target.value)}
+                className="w-12 pl-2 text-lg outline-none"
+              />
+            </div>
+          </div>
+          <div className="px-4 flex space-x-1">
+            <button className="flex-grow bg-red-400 py-1 rounded-md text-white">
+              Cancel
+            </button>
+            <button className="flex-grow bg-blue-500 py-1 rounded-md font-semibold text-white">
+              Search
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
